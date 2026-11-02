@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RUNNING (NEVER OUT OF TIME) — Lyrics Experience</title>
+<style>
+:root{color-scheme:dark;--accent:#b7ff45;--bg:#080b12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;overflow-x:hidden}
+#visual{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 70% 30%,#183c48 0%,transparent 42%),linear-gradient(135deg,#080b12,#101b28 55%,#07090f);transition:background 1.5s}
+#visual:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(183,255,69,.08),transparent 70%);animation:beam 7s linear infinite}
+#visual:after{content:"";position:absolute;inset:0;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent)}
+@keyframes beam{from{transform:translateX(-70%)}to{transform:translateX(70%)}}
+body.melancholy #visual{background:radial-gradient(ellipse at 50% 45%,#29313d 0%,transparent 48%),linear-gradient(145deg,#080b12,#18202b 60%,#080a10)}
+body.final #visual{background:radial-gradient(ellipse at 70% 35%,#5a3c19 0%,transparent 48%),linear-gradient(135deg,#11100d,#29200f 55%,#080b12)}
+main{position:relative;z-index:1;max-width:1100px;margin:auto;padding:38px 28px 30px;min-height:100vh;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px}.eyebrow{font-size:11px;letter-spacing:.28em;color:var(--accent);font-weight:800}.tag{font-size:11px;color:#aeb8c5;letter-spacing:.12em;border:1px solid #ffffff24;border-radius:99px;padding:8px 12px}
+h1{font-size:clamp(30px,5vw,58px);line-height:.98;letter-spacing:-.055em;margin:48px 0 8px;font-weight:900}h1 span{color:var(--accent)}.sub{color:#9da9b7;font-size:12px;letter-spacing:.24em}
+.stage{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:330px;padding:38px 0}
+.section{font-size:11px;letter-spacing:.3em;color:var(--accent);font-weight:800;margin-bottom:28px;transition:color .5s}
+.lyrics{max-width:900px;min-height:180px;display:flex;flex-direction:column;justify-content:center;gap:13px}
+.line{font-size:clamp(21px,3.5vw,42px);font-weight:750;line-height:1.12;letter-spacing:-.035em;color:#ffffff32;transition:all .35s ease;transform-origin:left}
+.line.prev{font-size:clamp(15px,2vw,21px);color:#ffffff45;font-weight:550}
+.line.active{color:#fff;transform:translateX(8px);text-shadow:0 0 30px #b7ff4533;animation:lyricEnter .62s cubic-bezier(.16,1,.3,1) both}
+.line.prev{animation:prevEnter .42s ease-out both}
+.line.next{animation:nextEnter .5s ease-out both}
+@keyframes lyricEnter{0%{opacity:0;transform:translate3d(55px,18px,0) scale(.88);filter:blur(9px);letter-spacing:.02em}65%{opacity:1;transform:translate3d(-4px,-2px,0) scale(1.025);filter:blur(0)}100%{opacity:1;transform:translate3d(8px,0,0) scale(1);filter:blur(0)}}
+@keyframes prevEnter{from{opacity:0;transform:translateY(15px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes nextEnter{from{opacity:0;transform:translateY(22px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+body.pulse #visual:before{animation:beam 1.8s linear infinite,glowPulse .7s ease-out}
+@keyframes glowPulse{0%{opacity:.65;filter:brightness(2)}100%{opacity:.18;filter:brightness(1)}}
+.section{animation:sectionEnter .7s cubic-bezier(.16,1,.3,1) both}
+@keyframes sectionEnter{from{opacity:0;transform:translateY(-12px);letter-spacing:.65em;filter:blur(5px)}to{opacity:1;transform:translateY(0);letter-spacing:.3em;filter:blur(0)}}
+.line.active:after{content:'';display:inline-block;width:5px;height:5px;margin-left:10px;border-radius:50%;background:var(--accent);vertical-align:middle;box-shadow:0 0 15px var(--accent);animation:dotBeat .9s ease-in-out infinite alternate}
+@keyframes dotBeat{to{transform:scale(1.8);opacity:.45}}
+.line.active:before{content:"";display:inline-block;width:7px;height:.78em;background:var(--accent);margin-right:13px;vertical-align:-.02em;border-radius:5px}
+.line.next{font-size:clamp(15px,2vw,21px);color:#ffffff65;font-weight:550}
+.hint{color:#7d8998;font-size:12px;margin-top:28px;letter-spacing:.08em}
+.player{border:1px solid #ffffff20;background:#0b111bd9;backdrop-filter:blur(18px);border-radius:20px;padding:18px 20px 16px;box-shadow:0 20px 80px #0008}
+.controls{display:flex;align-items:center;gap:15px}.play{width:48px;height:48px;border:0;border-radius:50%;background:var(--accent);color:#080b12;font-size:18px;font-weight:900;cursor:pointer;flex:none}
+.time{font-variant-numeric:tabular-nums;color:#dce4ed;font-size:12px;min-width:84px}.right{margin-left:auto;display:flex;gap:12px;align-items:center}
+button.small{border:1px solid #ffffff24;background:transparent;color:#dce4ed;border-radius:9px;padding:8px 10px;cursor:pointer;font-size:12px}
+input[type=range]{accent-color:var(--accent);cursor:pointer}.seek{width:100%;margin:15px 0 10px}.bottom{display:flex;justify-content:space-between;align-items:center;color:#84909e;font-size:11px;letter-spacing:.08em}
+.volume{width:75px}.footer{display:flex;justify-content:space-between;color:#687483;font-size:10px;letter-spacing:.12em;margin-top:18px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+@media(max-width:600px){main{padding:25px 20px 20px}h1{margin-top:38px}.stage{min-height:300px;padding:25px 0}.player{padding:14px}.controls{gap:10px}.volume{display:none}.tag{font-size:9px}.footer{font-size:9px}}
+</style></head>
+<body>
+<div id="visual"></div><main>
+<div class="top"><div class="eyebrow">A LYRIC EXPERIENCE</div><div class="tag">4:48 · ORIGINAL AUDIO</div></div>
+<h1>RUNNING <span>(NEVER OUT OF TIME)</span></h1><div class="sub">EVERY STEP HAS A STORY.</div>
+<section class="stage"><div class="section" id="section">INTRO</div><div class="lyrics" id="lyrics"><div class="line active">Oh-oh, oh-oh</div></div><div class="hint" id="hint">Feel the rhythm. Follow the light.</div></section>
+<div class="player">
+<div class="controls"><button class="play" id="play" aria-label="播放">▶</button><div class="time" id="clock">0:00 / 4:48</div><div class="right"><button class="small" id="full">全屏</button><label style="font-size:11px;color:#9da9b7">音量</label><input class="volume" id="volume" type="range" min="0" max="1" step=".01" value=".85"></div></div>
+<input class="seek" id="seek" type="range" min="0" max="288" step=".05" value="0">
+<div class="bottom"><span>SYNCED LYRICS</span><span id="percent">0%</span></div>
+</div><div class="footer"><span>RUN WITH YOUR OWN RHYTHM</span><span>NEVER OUT OF TIME · 2026</span></div>
+<audio id="audio" preload="auto">
+  <source src="./running-never-out-of-time.mp3" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+</main>
+<script>
+const cues=[{"t": 0.0, "end": 4.5, "text": "Oh-oh, oh-oh", "section": "INTRO"}, {"t": 4.5, "end": 9.0, "text": "Feel the rhythm in my feet", "section": "INTRO"}, {"t": 9.0, "end": 13.5, "text": "Oh-oh, oh-oh", "section": "INTRO"}, {"t": 13.5, "end": 18.0, "text": "Life is calling, chase the beat!", "section": "INTRO"}, {"t": 18.0, "end": 22.5, "text": "Wake up, sunlight on my face", "section": "VERSE 1"}, {"t": 22.5, "end": 27.0, "text": "Lace my shoes, I’m ready for the race", "section": "VERSE 1"}, {"t": 27.0, "end": 31.5, "text": "Heartbeat jumping like a bassline sound", "section": "VERSE 1"}, {"t": 31.5, "end": 36.0, "text": "Got no limits, nothing holds me down", "section": "VERSE 1"}, {"t": 36.0, "end": 40.5, "text": "Left foot, right foot, hit the ground", "section": "VERSE 1"}, {"t": 40.5, "end": 45.0, "text": "Turn it up, let the world spin round", "section": "VERSE 1"}, {"t": 45.0, "end": 49.5, "text": "Every mile is a melody", "section": "VERSE 1"}, {"t": 49.5, "end": 54.0, "text": "Running is the way I feel so free!", "section": "VERSE 1"}, {"t": 54.0, "end": 58.5, "text": "I don’t need a finish line", "section": "PRE-CHORUS"}, {"t": 58.5, "end": 63.0, "text": "I just wanna feel alive", "section": "PRE-CHORUS"}, {"t": 63.0, "end": 67.5, "text": "With the wind against my skin", "section": "PRE-CHORUS"}, {"t": 67.5, "end": 72.0, "text": "Let the endless race begin!", "section": "PRE-CHORUS"}, {"t": 72.0, "end": 76.5, "text": "I’m running, running, running through the night", "section": "CHORUS"}, {"t": 76.5, "end": 81.0, "text": "Chasing every dream beneath the city lights", "section": "CHORUS"}, {"t": 81.0, "end": 85.5, "text": "I’m running, running, nothing feels too far", "section": "CHORUS"}, {"t": 85.5, "end": 90.0, "text": "With a million little sparks inside my heart", "section": "CHORUS"}, {"t": 90.0, "end": 94.5, "text": "Oh-oh-oh, I feel alive", "section": "CHORUS"}, {"t": 94.5, "end": 99.0, "text": "Oh-oh-oh, I’m born to fly", "section": "CHORUS"}, {"t": 99.0, "end": 103.5, "text": "Running, running, hear my heartbeat call", "section": "CHORUS"}, {"t": 103.5, "end": 108.0, "text": "I was made to run, I was made for it all!", "section": "CHORUS"}, {"t": 108.0, "end": 112.5, "text": "Run! Run! Run!", "section": "INSTRUMENTAL DROP"}, {"t": 112.5, "end": 117.0, "text": "Move your body, feel the sun!", "section": "INSTRUMENTAL DROP"}, {"t": 117.0, "end": 121.5, "text": "Run! Run! Run!", "section": "INSTRUMENTAL DROP"}, {"t": 121.5, "end": 126.0, "text": "We are never coming undone!", "section": "INSTRUMENTAL DROP"}, {"t": 126.0, "end": 130.5, "text": "But now the morning feels so cold", "section": "VERSE 2"}, {"t": 130.5, "end": 135.0, "text": "My tired legs don’t do what they’re told", "section": "VERSE 2"}, {"t": 135.0, "end": 139.5, "text": "The road is there, just like before", "section": "VERSE 2"}, {"t": 139.5, "end": 144.0, "text": "But I can’t chase it anymore", "section": "VERSE 2"}, {"t": 144.0, "end": 148.5, "text": "The years have written on my skin", "section": "VERSE 2"}, {"t": 148.5, "end": 153.0, "text": "A fading fire deep within", "section": "VERSE 2"}, {"t": 153.0, "end": 157.5, "text": "I hear the footsteps in my mind", "section": "VERSE 2"}, {"t": 157.5, "end": 162.0, "text": "But leave my younger self behind", "section": "VERSE 2"}, {"t": 162.0, "end": 168.0, "text": "I try to run, I try to fly", "section": "PRE-CHORUS 2"}, {"t": 168.0, "end": 174.0, "text": "But every step reminds me why", "section": "PRE-CHORUS 2"}, {"t": 174.0, "end": 180.0, "text": "The body fades, the dreams remain", "section": "PRE-CHORUS 2"}, {"t": 180.0, "end": 186.0, "text": "I miss the rhythm, miss the pain", "section": "PRE-CHORUS 2"}, {"t": 186.0, "end": 192.0, "text": "Oh, where did all the fast days go?", "section": "EMOTIONAL BREAK"}, {"t": 192.0, "end": 198.0, "text": "Where is the fire I used to know?", "section": "EMOTIONAL BREAK"}, {"t": 198.0, "end": 204.0, "text": "If I can’t run the way I did…", "section": "EMOTIONAL BREAK"}, {"t": 204.0, "end": 210.0, "text": "Does that mean the race is over?", "section": "EMOTIONAL BREAK"}, {"t": 210.0, "end": 212.67, "text": "No!", "section": "BUILD-UP"}, {"t": 212.67, "end": 215.33, "text": "I can still hear the sound", "section": "BUILD-UP"}, {"t": 215.33, "end": 218.0, "text": "Of my heartbeat shaking the ground", "section": "BUILD-UP"}, {"t": 218.0, "end": 220.67, "text": "No!", "section": "BUILD-UP"}, {"t": 220.67, "end": 223.33, "text": "Even if my steps are slow", "section": "BUILD-UP"}, {"t": 223.33, "end": 226.0, "text": "There’s still a road I wanna go!", "section": "BUILD-UP"}, {"t": 226.0, "end": 228.67, "text": "One more breath!", "section": "BUILD-UP"}, {"t": 228.67, "end": 231.33, "text": "One more stride!", "section": "BUILD-UP"}, {"t": 231.33, "end": 234.0, "text": "There’s still a runner deep inside!", "section": "BUILD-UP"}, {"t": 234.0, "end": 238.5, "text": "I’m running, running, running through my life", "section": "FINAL CHORUS"}, {"t": 238.5, "end": 243.0, "text": "Even when the road is hard, I’ll fight the fight", "section": "FINAL CHORUS"}, {"t": 243.0, "end": 247.5, "text": "I’m running, running, slower but still strong", "section": "FINAL CHORUS"}, {"t": 247.5, "end": 252.0, "text": "Every breath I take will carry me along", "section": "FINAL CHORUS"}, {"t": 252.0, "end": 256.5, "text": "Oh-oh-oh, I won’t give in", "section": "FINAL CHORUS"}, {"t": 256.5, "end": 261.0, "text": "Oh-oh-oh, let life begin", "section": "FINAL CHORUS"}, {"t": 261.0, "end": 265.5, "text": "I don’t need to run as fast as yesterday", "section": "FINAL CHORUS"}, {"t": 265.5, "end": 270.0, "text": "I’ll keep on running in my own way!", "section": "FINAL CHORUS"}, {"t": 270.0, "end": 272.25, "text": "Run… run…", "section": "OUTRO"}, {"t": 272.25, "end": 274.5, "text": "As long as I’m alive…", "section": "OUTRO"}, {"t": 274.5, "end": 276.75, "text": "Run… run…", "section": "OUTRO"}, {"t": 276.75, "end": 279.0, "text": "I’ll never say goodbye…", "section": "OUTRO"}, {"t": 279.0, "end": 281.25, "text": "I’m still running…", "section": "OUTRO"}, {"t": 281.25, "end": 283.5, "text": "I’m still running…", "section": "OUTRO"}, {"t": 283.5, "end": 285.75, "text": "For life.", "section": "OUTRO"}, {"t": 285.75, "end": 288.0, "text": "For life.", "section": "OUTRO"}];
+const audio=document.getElementById('audio'), play=document.getElementById('play'), seek=document.getElementById('seek');
+const lyrics=document.getElementById('lyrics'), section=document.getElementById('section'), clock=document.getElementById('clock');
+const hint=document.getElementById('hint'), percent=document.getElementById('percent');
+let current=-1, dragging=false;
+const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function mood(t){document.body.classList.toggle('melancholy',t>=126&&t<234);document.body.classList.toggle('final',t>=234);}
+let lastPulse=-1;
+function render(t){
+ let i=cues.findIndex(c=>t>=c.t&&t<c.end); if(i<0)i=t<cues[0].t?0:cues.length-1;
+ if(i!==current){current=i;const c=cues[i];section.textContent=c.section; section.style.animation='none'; void section.offsetWidth; section.style.animation=''; document.body.classList.remove('pulse'); void document.body.offsetWidth; document.body.classList.add('pulse'); setTimeout(()=>document.body.classList.remove('pulse'),720);
+  lyrics.innerHTML='';
+  [i-1,i,i+1].forEach((n,k)=>{if(n>=0&&n<cues.length){let d=document.createElement('div');d.className='line '+(k===0?'prev':k===1?'active':'next');d.textContent=cues[n].text;lyrics.appendChild(d)}});
+  hint.textContent=c.section==='VERSE 2'?'Some roads become memories.':c.section==='BUILD-UP'?'One more breath. One more stride.':c.section==='FINAL CHORUS'?'The rhythm never really leaves.':'Feel the rhythm. Follow the light.';
+ }
+ document.body.classList.toggle('drop',cues[i]?.section==='CHORUS'||cues[i]?.section==='FINAL CHORUS'||cues[i]?.section==='INSTRUMENTAL DROP');
+ mood(t);
+}
+function tick(){let t=audio.currentTime;render(t);clock.textContent=fmt(t)+' / '+fmt(audio.duration||288);if(!dragging)seek.value=t;percent.textContent=Math.round(t/(audio.duration||288)*100)+'%'}
+play.addEventListener('click', async () => {
+  if (!audio.paused) { audio.pause(); return; }
+  hint.textContent = '正在加载音乐…';
+  try {
+    if (audio.networkState === HTMLMediaElement.NETWORK_EMPTY) audio.load();
+    await audio.play();
+    hint.textContent = '音乐播放中 · Follow the rhythm';
+  } catch (err) {
+    console.error('Audio playback failed:', err);
+    if (err && err.name === 'NotAllowedError') {
+      hint.textContent = '浏览器阻止了播放，请再点击一次播放按钮。';
+    } else if (err && err.name === 'NotSupportedError') {
+      hint.textContent = 'Edge 无法识别音频格式，请确认 MP3 文件完整且未被改名。';
+    } else {
+      hint.textContent = '播放失败（' + (err?.name || '未知错误') + '）。请确认 MP3 与 index.html 在同一文件夹，并重新解压 ZIP。';
+    }
+  }
+});
+audio.addEventListener('error', () => {
+  const code = audio.error ? audio.error.code : 0;
+  const messages = {
+    1: '音频加载被中断。请重新点击播放。',
+    2: '读取音乐文件失败。请确认 MP3 与 index.html 在同一文件夹。',
+    3: '音乐文件解码失败，可能文件不完整。',
+    4: 'Edge 不支持当前音频源，请检查 MP3 文件。'
+  };
+  hint.textContent = messages[code] || '音乐加载失败。请确认已完整解压 ZIP 文件。';
+});
+audio.addEventListener('canplay', () => {
+  if (audio.paused) hint.textContent = '音乐已准备好，点击播放开始';
+});
+
+audio.onplay=()=>play.textContent='Ⅱ';audio.onpause=()=>play.textContent='▶';audio.ontimeupdate=tick;
+audio.onloadedmetadata=()=>{seek.max=audio.duration;tick()};
+seek.oninput=()=>{dragging=true;clock.textContent=fmt(+seek.value)+' / '+fmt(audio.duration||288)};
+seek.onchange=()=>{audio.currentTime=+seek.value;dragging=false;tick()};
+document.getElementById('volume').oninput=e=>audio.volume=+e.target.value;
+document.getElementById('full').onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()};
+audio.volume=.85;render(0);tick();
+</script></body></html>
